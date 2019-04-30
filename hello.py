@@ -214,15 +214,31 @@ def save():
     uri = "mongodb+srv://?retryWrites=true";
     client = MongoClient("mongodb+srv://admin:admin@cluster0-qokzw.mongodb.net/test?retryWrites=true")
     db = client.test
-    collection = db.contents
+    collection = db.editor
 
-    print(request.form['username'])
-    print(request.form['editordata'])
+    collection.insert({
+            "username": request.form['username'],
+            "editordata": request.form['editordata']
+        })
 
 
     results = collection.find()
     client.close()
-    return render_template('editor.html', data=results)
+    return render_template('list.html', data=results)
+
+
+@app.route('/list',methods=['GET'])
+def list():
+
+    uri = "mongodb+srv://?retryWrites=true";
+    client = MongoClient("mongodb+srv://admin:admin@cluster0-qokzw.mongodb.net/test?retryWrites=true")
+    db = client.test
+    collection = db.editor
+
+
+    results = collection.find()
+    client.close()
+    return render_template('list.html', data=results)
 
 
 
