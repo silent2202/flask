@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>#3_ MongoDB와 연결하기</h1>
+    <div>
+        <p>연결이 성공되면 아래에 데이터가 뜰꺼야!</p>
+        <p>------------------------------------</p>
+        {% for i in data %}
+            <p>제품: {{i.product}}</p>
+            <p>D/T NO: {{i.dtno}}</p>
+            <p>증상: {{i.comment}}</p>
+            <p>발생원인: {{i.reason}}</p>
+            <p>중요도: {{i.point}}</p>
+            <p>---------------</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
