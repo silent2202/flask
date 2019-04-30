@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>리스트</title>
 </head>
 <body>
     <h1>리스트</h1>
@@ -9,8 +9,9 @@
 
         <p>------------------------------------</p>
         {% for i in data %}
+            <p>id: {{i._id}}</p>
             <p>작성자: {{i.username}}</p>
-            <p>작성내용: {{i.editordata}}</p>
+            <p>작성내용: <a href='/detail?id={{i._id}}'>{{i.editordata}}</a></p>
             <p>---------------</p>
         {% endfor %}
     </div>

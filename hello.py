@@ -1,6 +1,7 @@
 # _*_ coding: utf-8 _*_
 
-from flask import Flask, request, session, render_template, redirect, url_for, abort, make_response
+from flask import Flask, request, session, render_template, redirect, url_for, abort, make_response, request
+from bson.objectid import ObjectId
 from pymongo import MongoClient
 
 
@@ -233,6 +234,7 @@ def list():
 
 
     results = collection.find()
+    print(results[0])
     client.close()
     return render_template('list.html', data=results)
 
@@ -240,15 +242,27 @@ def list():
 @app.route('/main',methods=['GET'])
 def main():
 
-    uri = "mongodb+srv://?retryWrites=true";
+
+    return render_template('main.html')
+
+
+
+@app.route('/detail',methods=['GET'])
+def detail():
+    id = request.args.get('id')
+
     client = MongoClient("mongodb+srv://admin:admin@cluster0-qokzw.mongodb.net/test?retryWrites=true")
     db = client.test
     collection = db.editor
 
+    print(id)
+    results = collection.find_one({'_id':ObjectId(id)})
 
-    results = collection.find()
+    print(results)
     client.close()
-    return render_template('main.html', data=results)
+    return render_template('detail.html', data=results)
+
+
 
 
 

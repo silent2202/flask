@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Summernote</title>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+  <link href="{{url_for('static', filename='dist/summernote.css')}}" rel="stylesheet">
+  <script src="{{url_for('static', filename='dist/summernote.js')}}"></script>
+  <script src="{{url_for('static', filename='dist/lang/summernote-ko-KR.js')}}"></script>
+</head>
+<body>
+  <form action="/save" method="post" role="form" nonsubmit="submitForm" name="testForm">
+    작성자 : <input type=text" name="username" value={{data.username}} /> <br/>
+    작성내용 :
+    <textarea id="summernote" name="editordata">{{data.editordata}}</textarea>
+    <center>
+      <a href="/list">목록</a>
+    </center>
+
+  </form>
+  <script>
+    $(document).ready(function() {
+
+        $('#summernote').summernote({
+		lang: 'ko-KR', // default: 'en-US'
+		height: 150   //set editable area's height
+	    });
+
+	    function submitForm(){
+          $("#testForm").submit();
+	    }
+
+    });
+
+
+
+
+  </script>
+</body>
+</html>
