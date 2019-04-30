@@ -11,10 +11,6 @@ app = Flask(__name__)
 def hello_world():
     return 'hello world!'
 
-@app.route('/main')
-def main():
-    return 'Main Page'
-
 @app.route('/user/<username>')
 def showUserProfile(username):
     app.logger.debug('RETRIEVE DATA - USER ID : %s' % username)
@@ -239,6 +235,20 @@ def list():
     results = collection.find()
     client.close()
     return render_template('list.html', data=results)
+
+
+@app.route('/main',methods=['GET'])
+def main():
+
+    uri = "mongodb+srv://?retryWrites=true";
+    client = MongoClient("mongodb+srv://admin:admin@cluster0-qokzw.mongodb.net/test?retryWrites=true")
+    db = client.test
+    collection = db.editor
+
+
+    results = collection.find()
+    client.close()
+    return render_template('main.html', data=results)
 
 
 
